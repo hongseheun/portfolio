@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍세흔 디자인 포트폴리오</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* PC 화면(가로 1025px 이상)에서는 버튼 두 개를 강제로 숨김! */
+        @media (min-width: 1025px) {
+            .about-close-btn,
+            .about-toggle-btn {
+                display: none !important;
+            }
+        }
+       
+    </style>
+</head>
+<body>
+
+    <div id="main-viewport">
+        <!-- 메인페이지 -->
+        <section id="sec-hero" class="hero-section">
+            <div class="cursor-dot"></div>
+            <div class="cursor-follower"></div>
+            <div class="hero-graphics super-flashy">
+                <div class="blur-blob blob-rich-1"></div>
+                <div class="blur-blob blob-rich-2"></div>
+                <div class="blur-blob blob-rich-3"></div>
+                <div class="pattern-grid"></div>
+                <div class="big-dot-circle"></div>
+                <div class="rotating-square"></div>
+                <div class="full-circle-draw"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle class="draw-circle" cx="100" cy="100" r="90" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="geo-shape triangle-shape t1"></div>
+                <div class="geo-shape triangle-shape t2"></div>
+                <div class="sparkle sp-1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg></div>
+                <div class="sparkle sp-2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg></div>
+                <div class="sparkle sp-3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg></div>
+                <div class="deco-plus pos-1">+</div>
+                <div class="deco-plus pos-2">+</div>
+                <div class="deco-plus pos-3">+</div>
+                <div class="deco-circle-fill c1"></div>
+                <div class="deco-circle-outline c2"></div>
+                <div class="deco-line-angled l1"></div>
+                <div class="deco-line-angled l2"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-top-row"><span class="top-tag">DESIGN</span><span class="top-tag">PORTFOLIO</span></div>
+                <h1 class="hero-main-title hover-target">
+                    <div class="title-box-wrapper">
+
+                    <div class="typing-container"><span id="typing-text"></span></div>
+                    <div class="sliding-container"><span class="static-text">I'M</span><div class="sliding-words">
+                        <span>HONGSEHEUN</span><span>DESIGNER</span><span>ARTIST</span><span>STORYTELLER</span><span>MARKETER</span></div></div>
+                </h1>
+                <p class="hero-intro-text hover-target">다재다능한 그래픽으로 시선을 끄는 디자이너 홍세흔입니다<br class="mobile-br"> </p>
+    
+            </div>
+        </section>
+
+        <!-- 내 소개 페이지 -->
+        <section id="sec-6" class="sticky-section">
+            <div class="card-box">
+                <div class="window-bar">
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <span class="grade-badge">About</span>
+                        <div class="mypic"><img src="./images/1000019698.jpg" alt="홍세흔"></div>
+                        <h2 style="font-size: 3rem; margin-bottom: 10px;">홍세흔</h2>
+                        <p style="font-weight: 700; color: #111; margin-bottom: 15px;">2002.04.27</p>
+                        <p class="myspeak"><i>"풍부한 스토리텔링으로<br>시선을 끄는 디자이너 홍세흔입니다!"</i></p>
+
+                        <button class="btn-view about-toggle-btn" onclick="toggleAbout()">상세 이력 보기 +</button>
+
+                    </div>
+                        
+
+                    <div class="card-right" style="background: #fafafc; align-items: center; overflow-y: auto;">
+
+                        <button class="about-close-btn" onclick="toggleAbout()">&times;</button>
+
+                        <div class="about-grid">
+                            <div class="about-item">
+                                <h3>Education</h3>
+                                <ul>
+                                    <li><span>2021.2</span> <div>호산고등학교 졸업</div></li>
+                                    <li><span>2026.2</span> <div>계명대학교 졸업</div></li>
+                                    <li style="font-size: 0.85rem; color: #888;"><span></span> <div>국어국문학과(주) / <br>언론영상학과(복수)</div></li>
+                                </ul>
+                            </div>
+                            <div class="about-item">
+                                <h3>License</h3>
+                                <ul>
+                                    <li><span></span> <div>컴퓨터그래픽기능사</div></li>
+                                    <li><span></span> <div>GTQ, GTQi, GTQ id 1급</div></li>
+                                </ul>
+                            </div>
+                            <div class="about-item">
+                                <h3>Experience</h3>
+                                <ul>
+                                    <li><span>2024.1 ~ 2024.8</span> <div>카페 봄봄 아르바이트</div></li>
+                                    <li><span>2024.8 ~ 2025.2</span> <div>UI/UX 반응형 웹디자인&웹퍼블리셔 양성과정 훈련</div></li>
+                                </ul>
+                            </div>
+                            <div class="about-item">
+                                <h3>Contact</h3>
+                                <ul>
+                                    <li><span>Phone</span> <div>010-7739-4356</div></li>
+                                    <li><span>Email</span> <div>hongseheun0427@gmail.com</div></li>
+                                </ul>
+                            </div>
+                            <div class="about-item about-item-skill">
+                                <h3>Skill</h3>
+                                <div class="skill-list">
+                                    <span class="skill-tag">Figma</span><span class="skill-tag">Photoshop</span>
+                                    <span class="skill-tag">Illustrator</span><span class="skill-tag">Premiere Pro</span>
+                                    <span class="skill-tag">After Effects</span><span class="skill-tag">HTML/CSS</span>
+                                    <span class="skill-tag">Firefly</span><span class="skill-tag">Gemini</span><span class="skill-tag">Cafe24</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-5" class="sticky-section">
+            <div class="card-box">
+                <div class="window-bar">
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <span class="grade-badge">Branding</span>
+                        <h2>브랜딩 작업</h2>
+                        <p>개인 브랜드 브랜딩 작업물입니다.</p>
+                        <ul>
+                            <li>Firefly</li>
+                            <li>Gemini</li>
+                            <li>Figma</li>
+                            <li>Photoshop</li>
+                            <li>Illustrator</li>
+                            <li>Cafe24</li>
+                        </ul>
+                        <!-- <button class="btn-view">자세히 보기</button> -->
+                    </div>
+                    <div class="card-right">
+                        <div class="slider-track" id="track-5">
+
+                           <div class="book-item" onclick="window.open('https://mercyul2745.cafe24.com/skin-skin2', '_blank')">
+                        <div class="book-cover" style="background-image: url('./images/데이-로고2.png'); background-size: 85%;">
+                            <div class="book-info-overlay">
+                                <p class="overlay-text">20대 여성을 위한<br> 힙 웨어 의류 브랜드 브랜딩</p>
+                                <span class="view-more">바로가기 +</span>
+                            </div>
+                        </div>
+                        <div class="book-title">Day</div>
+                        <div class="book-sub">2026.1</div>
+                    </div>
+
+                    <div class="book-item" onclick="openModal(['./images/ood1.png','./images/od_01.png','./images/od_02.png','./images/od_03.png'])">
+                        <div class="book-cover" style="background-image: url('./images/OOD로고.png'); background-size: 85%;">
+                            <div class="book-info-overlay">
+                                <p class="overlay-text">반려견 수제 간식 <br>& 카페 브랜드 브랜딩</p>
+                                <span class="view-more">바로가기 +</span>
+                            </div>
+                        </div>
+                        <div class="book-title">OOD</div>
+                        <div class="book-sub">2025.12</div>
+                    </div>
+                       
+                        <div class="book-item" onclick="openModal(['./images/kroll.png','./images/kroll_01.png','./images/kroll_02.png','./images/kroll_03.png'])">
+                        <div class="book-cover" style="background-image: url('./images/kroll-로고.png'); background-size: 85%;">
+                            <div class="book-info-overlay">
+                                <p class="overlay-text">김밥 패스트푸드 브랜드 kroll 공모전 참가작</p>
+                                <span class="view-more">바로가기 +</span>
+                            </div>
+                        </div>
+                        <div class="book-title">KROLL</div>
+                        <div class="book-sub">2025.7</div>
+                    </div>
+
+
+                        </div>
+                        <div class="slide-ctrl">
+                            <button class="ctrl-btn" onclick="moveSlide('track-5', -1)">←</button>
+                            <button class="ctrl-btn" onclick="moveSlide('track-5', 1)">→</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-4" class="sticky-section">
+            <div class="card-box">
+                 <div class="window-bar">
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <span class="grade-badge">Graphic</span>
+                        <h2>그래픽 작업</h2>
+                        <p>포스터, 배너, 타이포그래피, 그림<br>각종 그래픽 작업물입니다.</p>
+                         <ul>
+                            <li>Firefly</li>
+                            <li>Gemini</li>
+                            <li>Figma</li>
+                            <li>Photoshop</li>
+                            <li>Illustrator</li>
+                        </ul>
+                        <!-- <button class="btn-view">자세히 보기</button> -->
+                    </div>
+                    <div class="card-right">
+                        <div class="slider-track" id="track-4">
+
+                            <div class="book-item"  onclick="openModal(['./images/selover1.png', './images/selover2.png','./images/selover3.png','./images/selover4.png','./images/selover5.png'])"><div class="book-cover" style="background-image: url(./images/sero.png); background-size: cover;"></div><div class="book-title">오리지널 캐릭터</div><div class="book-sub">2026.2</div></div>
+                           
+                             <div class="book-item"  onclick="openModal('./images/모노2.png')"><div class="book-cover" style="background-image: url(./images/모노2.png); background-size: cover;"></div><div class="book-title">MONO포스터</div><div class="book-sub">2026.2</div></div>
+
+                         <div class="book-item" onclick="openModal('./images/2026새해연하장.png')"><div class="book-cover" style="background-image: url(./images/2026새해연하장.png); background-size: cover;"></div><div class="book-title">2026 새해 연하장</div><div class="book-sub">2026.1</div></div>
+
+                        
+                        </div>
+                        <div class="slide-ctrl">
+                            <button class="ctrl-btn" onclick="moveSlide('track-4', -1)">←</button>
+                            <button class="ctrl-btn" onclick="moveSlide('track-4', 1)">→</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-3" class="relative-section">
+            <div class="card-box">
+                 <div class="window-bar">
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <span class="grade-badge">Web & App</span>
+                        <h2 class="webh2">웹사이트&<br>앱 작업</h2>
+                        <p>ui/ux, 앱, 웹사이트 등<br>각종 웹디자인 개인 작업물입니다.</p>
+                         <ul>
+                            <li>Firefly</li>
+                            <li>Gemini</li>
+                            <li>Figma</li>
+                            <li>Photoshop</li>
+                            <li>Illustrator</li>
+                            <li>HTML/CSS</li>
+                            <li>After Effects</li>
+                        </ul>
+                        <!-- <button class="btn-view">자세히 보기</button> -->
+                    </div>
+                    <div class="card-right">
+                        <div class="slider-track" id="track-3">
+                           
+                            <div class="book-item" onclick="window.open('https://hong-sehun.github.io/minumsa/', '_blank')"><div class="book-cover" style="background-image: url(./images/minlogo.png); background-size: 80%;">
+                             <div class="book-info-overlay">
+                                <p class="overlay-text">도서출판사 민음사<br>리디자인&웹페이지 코딩</p>
+                                <span class="view-more">바로가기 +</span>
+                            </div>
+                        </div>
+                        <div class="book-title">민음사 웹리디자인</div><div class="book-sub">2025.2</div></div>
+
+                         <div class="book-item" onclick="window.open('https://hong-sehun.github.io/sehunportfolio/', '_blank')"><div class="book-cover" style="background-image: url(./images/portfoliome.png); background-size: contain; background-color: #40985A;">
+                             <div class="book-info-overlay">
+                                <p class="overlay-text">개인 캐릭터 활용<br>포트폴리오 웹페이지 코딩</p>
+                                <span class="view-more">바로가기 +</span>
+                            </div>
+                        </div>
+                        <div class="book-title">개인 포트폴리오 웹사이트</div><div class="book-sub">2025.2</div></div>
+
+
+                        <div class="book-item" onclick="window.open('https://www.figma.com/proto/hu0iKxKN03BGnFo0YfRaD5/%EB%B2%A0%EC%9D%B4%EB%B9%84%EB%84%88%EB%A6%AC-%EC%99%84%EC%84%B1%EB%B3%B8?node-id=1-492&t=WROIGgn1dfz3wKmx-1', '_blank')"><div class="book-cover" style="background-image: url(./images/baby.png); background-size: cover;">
+                             <div class="book-info-overlay">
+                                <p class="overlay-text">출산, 육아 정보 앱 <br>팀 프로젝트 </p>
+                                <span class="view-more">바로가기 +</span>
+                            </div>
+                        </div>
+                        <div class="book-title">베이비너리</div><div class="book-sub">2024.12</div></div>
+
+                        <div class="book-item" onclick="window.open('https://www.figma.com/proto/jmvEEhTuKEDpWzGtxeITSf/%EA%B3%B5%EC%A3%BC%EC%98%A8%EB%B0%A4-%EB%A6%AC%EB%94%94%EC%9E%90%EC%9D%B8?node-id=1-2&t=CKFJ2nKDHHUmIHZF-1', '_blank')"><div class="book-cover" style="background-image: url(./images/gongju.png); background-size: cover;">
+                             <div class="book-info-overlay">
+                                <p class="overlay-text">공주온밤 웹사이트 <br>개인 리디자인</p>
+                                <span class="view-more">바로가기 +</span>
+                            </div>
+                        </div>
+                        <div class="book-title">공주온밤 웹리디자인</div><div class="book-sub">2024.11</div></div>
+
+                        </div>
+                        <div class="slide-ctrl">
+                            <button class="ctrl-btn" onclick="moveSlide('track-3', -1)">←</button>
+                            <button class="ctrl-btn" onclick="moveSlide('track-3', 1)">→</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <h3>HONGSEHEUN</h3>
+            <p>Contact: 010-7739-4356 | hongseheun0427@gmail.com</p>
+        </footer>
+    </div>
+
+    <nav class="nav-dock">
+        <button onclick="moveToIndex(0)">Home</button>
+        <button onclick="moveToIndex(1)">About</button>
+        <button onclick="moveToIndex(2)">Branding</button>
+        <button onclick="moveToIndex(3)">Graphic</button>
+        <button onclick="moveToIndex(4)">Web&app</button>
+    </nav>
+
+    <!-- 아이템의 커서 호버 -->
+     <div class="click-cursor">Click!</div>
+
+        <!-- 모달 -->
+    <div id="image-modal" class="modal-overlay">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+    
+        <button class="modal-nav prev-btn" onclick="changeImage(-1)">&#10094;</button>
+    
+        <div class="modal-content-wrapper">
+        <img class="modal-content" id="full-image">
+        <div class="image-counter" id="image-counter">1 / 1</div>
+        </div>
+
+        <button class="modal-nav next-btn" onclick="changeImage(1)">&#10095;</button>
+    </div>
+
+    <script>
+            function moveSlide(trackId, dir) {
+            const track = document.getElementById(trackId);
+            const container = track.parentElement;
+            const items = track.querySelectorAll('.book-item');
+            
+            if (items.length === 0) return;
+
+            // 1. 카드 크기와 여백(gap)을 실시간으로 계산
+            const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
+            const itemWidth = items[0].offsetWidth;
+            const moveUnit = itemWidth + gap; // 한번에 이동할 단위
+            
+            // 2. 컨테이너의 '실제 콘텐츠 너비'(패딩 제외) 구하기
+            const containerStyle = window.getComputedStyle(container);
+            const containerInnerWidth = container.clientWidth - parseFloat(containerStyle.paddingLeft) - parseFloat(containerStyle.paddingRight);
+
+            // 3. 화면에 온전히 보이는 카드 개수 계산
+            const visibleCount = Math.floor(containerInnerWidth / moveUnit);
+            const scrollCount = visibleCount > 0 ? visibleCount : 1; // 최소 1개는 이동
+
+            // 4. 현재 위치 파악
+            const currentTransform = track.style.transform;
+            let currentX = 0;
+            if (currentTransform) {
+                const match = currentTransform.match(/translateX\(([-0-9.]+)px\)/);
+                if (match) currentX = parseFloat(match[1]);
+            }
+
+            // 5. 목표 위치 계산
+            let nextX;
+            if (dir === 1) { // 다음
+                nextX = currentX - (moveUnit * scrollCount);
+            } else { // 이전
+                nextX = currentX + (moveUnit * scrollCount);
+            }
+
+            // 6. 범위 제한 (빈 공간 방지)
+            const maxScroll = -(track.scrollWidth - containerInnerWidth); // 패딩 제외한 너비 기준
+            
+            if (nextX > 0) nextX = 0;
+            if (nextX < maxScroll) nextX = maxScroll; // 끝부분에 딱 맞춤
+
+            // 7. 이동 실행
+            track.style.transform = `translateX(${nextX}px)`;
+        }
+
+      function moveToIndex(index) {
+                const viewport = document.getElementById('main-viewport');
+                const targetPos = index * window.innerHeight;
+                
+                // 이동하는 동안만 스냅 잠시 끄기
+                viewport.style.scrollSnapType = 'none';
+                
+                viewport.scrollTo({ 
+                    top: targetPos, 
+                    behavior: 'smooth' 
+                });
+
+                // 이동이 끝날 즈음 다시 켜기
+                setTimeout(() => { 
+                    viewport.style.scrollSnapType = 'y mandatory'; 
+                }, 600); // behavior: 'smooth'의 기본 애니메이션 시간에 맞춤
+            }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 커서 이펙트
+            const section = document.getElementById('sec-hero');
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            const hoverTargets = document.querySelectorAll('.hover-target');
+
+            if(section && cursorDot && cursorFollower) {
+                section.addEventListener('mousemove', (e) => {
+                    const x = e.clientX; const y = e.clientY;
+                    cursorDot.style.left = `${x}px`; cursorDot.style.top = `${y}px`;
+                    cursorFollower.style.left = `${x}px`; cursorFollower.style.top = `${y}px`;
+                });
+                hoverTargets.forEach(target => {
+                    target.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
+                    target.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
+                });
+                section.addEventListener('mouseleave', () => { cursorDot.style.opacity = '0'; cursorFollower.style.opacity = '0'; });
+                section.addEventListener('mouseenter', () => { cursorDot.style.opacity = '1'; cursorFollower.style.opacity = '1'; });
+            }
+
+            // 타이핑 이펙트
+            const textElement = document.getElementById("typing-text");
+            if(textElement) {
+                const phrase = "HELLO:)"; let index = 0;
+                function typeEffect() {
+                    if (index < phrase.length) {
+                        textElement.textContent += phrase.charAt(index); index++; setTimeout(typeEffect, 150);
+                    }
+                }
+                typeEffect();
+            }
+        });
+
+        const viewport = document.getElementById('main-viewport');
+        const navBtns = document.querySelectorAll('.nav-dock button');
+        const allCardSections = [document.getElementById('sec-6'), document.getElementById('sec-5'), document.getElementById('sec-4'), document.getElementById('sec-3')];
+        const fadeSections = [document.getElementById('sec-6'), document.getElementById('sec-5'), document.getElementById('sec-4')];
+
+        let isScrolling = false;
+
+        // 모바일 터치 이벤트, 터치로 반응형 넘어가도록
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        viewport.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            if (isScrolling) return;
+            
+            const swipeDistance = touchStartY - touchEndY;
+            const threshold = 40; // 스와이프 인식 최소 거리 (너무 민감하면 이 숫자를 늘리세요)
+
+            if (Math.abs(swipeDistance) > threshold) {
+                // swipeDistance가 양수면 아래로 스와이프(다음 카드), 음수면 위로 스와이프(이전 카드)
+                const direction = swipeDistance > 0 ? 1 : -1;
+                const scrollPos = viewport.scrollTop;
+                const windowHeight = window.innerHeight;
+                
+                let currentIndex = Math.round(scrollPos / windowHeight);
+                let targetIndex = currentIndex + direction;
+
+                // 인덱스 범위 확인 후 이동 (0번 홈 ~ 5번 푸터)
+                if (targetIndex >= 0 && targetIndex <= 5) {
+                    moveToIndex(targetIndex);
+                }
+            }
+        }
+
+        // 휠 이벤트 제어
+        viewport.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+            
+            const direction = e.deltaY > 0 ? 1 : -1;
+            const scrollPos = viewport.scrollTop;
+            const windowHeight = window.innerHeight;
+            
+            // 현재 위치를 기준으로 인덱스 계산
+            let currentIndex = Math.round(scrollPos / windowHeight);
+            let targetIndex = currentIndex + direction;
+
+            // 인덱스 범위: 0(Home) ~ 5(Footer)
+            if (targetIndex >= 0 && targetIndex <= 5) {
+                e.preventDefault();
+                moveToIndex(targetIndex);
+            }
+        }, { passive: false });
+
+        // 이동 함수: 속도 및 안정성 개선
+        function moveToIndex(index) {
+            if (isScrolling) return;
+            isScrolling = true;
+
+            const targetPos = index * window.innerHeight;
+            
+            viewport.style.scrollSnapType = 'none'; 
+            
+            viewport.scrollTo({ 
+                top: targetPos, 
+                behavior: 'smooth' 
+            });
+
+            setTimeout(() => {
+                viewport.style.scrollSnapType = 'y mandatory';
+                isScrolling = false;
+                updateActiveStates(index);
+            }, 400); 
+        }
+
+        function updateActiveStates(currentIndex) {
+            const windowHeight = window.innerHeight;
+
+            // 네비 버튼 활성화 
+            navBtns.forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === currentIndex);
+            });
+
+            // 카드 등장 및 사라짐
+            allCardSections.forEach((sec, idx) => {
+                // 인덱스 1이 sec-6, 2가 sec-5 ... 순서임
+                if (currentIndex >= idx + 1) {
+                    sec.classList.add('active');
+                } else {
+                    sec.classList.remove('active');
+                }
+            });
+
+            fadeSections.forEach((sec, idx) => {
+                if (currentIndex > idx + 1) {
+                    sec.classList.add('fade-out');
+                } else {
+                    sec.classList.remove('fade-out');
+                }
+            });
+        }
+
+       /* [갤러리 모달 스크립트] */
+            let currentImages = []; // 현재 보고 있는 프로젝트의 이미지들
+            let currentIndex = 0;   // 현재 보고 있는 이미지 번호
+
+            // 모달 열기 함수 (이미지 주소 1개 또는 배열 모두 가능)
+            function openModal(source) {
+                const modal = document.getElementById('image-modal');
+                const modalImg = document.getElementById('full-image');
+                const counter = document.getElementById('image-counter');
+                const prevBtn = document.querySelector('.prev-btn');
+                const nextBtn = document.querySelector('.next-btn');
+
+                // 1. 입력받은게 배열인지 문자열인지 확인해서 리스트로 만듦
+                if (Array.isArray(source)) {
+                    currentImages = source;
+                } else {
+                    currentImages = [source]; // 하나만 들어오면 리스트로 감쌈
+                }
+
+                // 2. 초기화
+                currentIndex = 0;
+                updateModalImage();
+
+                // 3. 이미지가 1장이면 화살표 숨김, 여러장이면 보임
+                if (currentImages.length > 1) {
+                    prevBtn.style.display = 'block';
+                    nextBtn.style.display = 'block';
+                    counter.style.display = 'block';
+                } else {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    counter.style.display = 'none';
+                }
+
+                // 4. 모달 표시 (CSS 클래스로 제어)
+                modal.style.display = 'flex';
+                setTimeout(() => { modal.classList.add('show'); }, 10); // 부드러운 효과
+                document.getElementById('main-viewport').style.overflowY = 'hidden'; // 스크롤 잠금
+            }
+
+            // 이미지 업데이트 함수
+            function updateModalImage() {
+                const modalImg = document.getElementById('full-image');
+                const counter = document.getElementById('image-counter');
+
+                modalImg.src = currentImages[currentIndex];
+                counter.innerText = `${currentIndex + 1} / ${currentImages.length}`;
+            }
+
+            // 화살표 클릭 시 실행 (방향: -1 또는 1)
+            function changeImage(direction) {
+                currentIndex += direction;
+
+                // 첫 장에서 뒤로 가면 -> 마지막 장으로
+                if (currentIndex < 0) {
+                    currentIndex = currentImages.length - 1;
+                }
+                // 마지막 장에서 앞으로 가면 -> 첫 장으로
+                else if (currentIndex >= currentImages.length) {
+                    currentIndex = 0;
+                }
+
+                updateModalImage();
+            }
+
+            // 모달 닫기
+            function closeModal() {
+                const modal = document.getElementById('image-modal');
+                modal.classList.remove('show');
+                setTimeout(() => { modal.style.display = 'none'; }, 300); // 애니메이션 후 숨김
+                document.getElementById('main-viewport').style.overflowY = 'scroll'; // 스크롤 복구
+            }
+
+           /* [키보드 이벤트 통합 관리] */
+            document.addEventListener('keydown', (e) => {
+                const modal = document.getElementById('image-modal');
+
+                if (modal.style.display === 'flex') {
+                    
+                    e.preventDefault(); 
+                    e.stopPropagation();
+
+                    // 모달 내부 이미지 넘기기 실행
+                    if (e.key === 'ArrowLeft') changeImage(-1);
+                    if (e.key === 'ArrowRight') changeImage(1);
+                    if (e.key === 'Escape') closeModal();
+                    
+                    return; 
+                }
+            });
+
+
+        /* 아이템 마우스 호버 시 나오는 클릭버튼 */
+            const clickCursor = document.querySelector('.click-cursor');
+            const bookItems = document.querySelectorAll('.book-item');
+
+            // 1. 커서 움직임 (항상 마우스 따라다님)
+            document.addEventListener('mousemove', (e) => {
+                // requestAnimationFrame을 사용하여 부드럽게 이동
+                requestAnimationFrame(() => {
+                    clickCursor.style.left = `${e.clientX}px`;
+                    clickCursor.style.top = `${e.clientY}px`;
+                });
+            });
+
+            // 2. book-item 호버 이벤트 연결
+            bookItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    clickCursor.classList.add('active'); // 커서 보이기
+                    
+                    // (선택사항) 기존 메인 커서가 있다면 여기서 숨김 처리 가능
+                    // document.querySelector('.cursor-dot').style.opacity = 0;
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    clickCursor.classList.remove('active'); // 커서 숨기기
+         
+                });
+            });
+
+            // About 반응형 시 x버튼 보이기
+            function toggleAbout() {
+                const aboutContent = document.querySelector('#sec-6 .card-right');
+                aboutContent.classList.toggle('show');
+            }
+
+        // 페이지 로드 시 시작
+            window.addEventListener('DOMContentLoaded', typeEffect);
+    </script>
+
+</body>
+</html>

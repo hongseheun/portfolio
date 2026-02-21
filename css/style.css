@@ -312,8 +312,10 @@
 
 
         /* 카드 배경 */
-        .card-box {
-            width: 95%; max-width: 1400px; height: 75dvh;
+       .card-box {
+            width: 100%; 
+            max-width: 1400px; 
+            height: 90vh; 
             display: flex; flex-direction: column; padding: 0;
             background: transparent; 
             border-radius: 24px; 
@@ -321,7 +323,7 @@
             overflow: hidden;
             opacity: 0;
             transform: translateY(150px) scale(0.95); 
-            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         
@@ -733,6 +735,11 @@
     }
 
        @media (max-width: 768px) {
+           .book-title {
+            font-size: .8rem;
+           }
+
+
     /* 1. 상단 회색줄 & 신호등 원 크기 축소 */
     .window-bar { 
         height: 40px; 
@@ -763,6 +770,13 @@
     }
     
     /* 4. About */
+    .about-grid { 
+        display: grid; 
+        grid-template-columns: 1fr !important; 
+        gap: 20px; 
+        width: 100%; 
+    }
+
     #sec-6 .card-left {
         height: 100% !important;
         padding: 20px 15px 15px 15px !important; 
@@ -792,7 +806,15 @@
         flex: 1; 
         align-items: center; 
     }
-    #sec-6 .card-right { padding: 40px 20px; } 
+    #sec-6 .card-right { 
+        overflow-y: auto !important;
+        -ms-overflow-style: none; 
+        scrollbar-width: none; 
+        padding: 40px 20px !important;
+    }
+    #sec-6 .card-right::-webkit-scrollbar {
+        display: none; 
+    }
 
     /* 6. 공통 글자 크기 최적화 */
     .card-left h2 { font-size: 1.7rem; margin-bottom: 5px; text-align: center; line-height: 1.2; }

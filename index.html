@@ -564,10 +564,19 @@
         });
 
         // About 토글 버튼
-        window.toggleAbout = function() {
-            const aboutContent = document.querySelector('#sec-6 .card-right');
-            if(aboutContent) aboutContent.classList.toggle('show');
-        };
+    window.toggleAbout = function() {
+        const aboutContent = document.querySelector('#sec-6 .card-right');
+        if(!aboutContent) return;
+
+
+        aboutContent.classList.toggle('show');
+
+        if (aboutContent.classList.contains('show')) {
+            isScrolling = true; 
+        } else {
+            isScrolling = false; 
+        }
+    };
 
         // 타이핑 효과
         const textElement = document.getElementById("typing-text");

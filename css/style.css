@@ -39,6 +39,17 @@
             }
 
 
+            /* 스크롤바 숨기기! */
+            #sec-6 .card-right::-webkit-scrollbar {
+            display: none; 
+        }
+
+        #sec-6 .card-right {
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+
+
         .hero-section { position: sticky; top: 0; z-index: 1; background: transparent; }
         .hero-content { position: relative; z-index: 1; }
 
@@ -620,6 +631,9 @@
                 transform: translateY(100%); 
                 opacity: 0;
                 transition: all 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+                -webkit-scrollb{display: none;}
+                -ms-overflow-style:none;
+                scrollbar-width: none;
             }
             
         #sec-6 .card-right.show {
@@ -718,98 +732,122 @@
         .mypic img { width: 130px; height: 180px; }
     }
 
-        @media (max-width: 768px) {
-        /* 1. 카드 박스 크기 및 여백 조정 */
-        .card-box { 
-            width: 95%; 
-            height: 85vh; 
-            border-radius: 24px; 
-        }
-        .card-left { 
-            padding: 30px 20px; 
-            flex: 0.3; 
-        }
-        .card-left h2 { font-size: 2.2rem; margin-bottom: 10px; }
-
-        /* 웹/앱 글자 br 풀기 */
-        .card-left .webh2 br {
-        display: none;
-        }
-
-        .card-left .webh2 br::after{
-            content: " "; 
-        }
-         
-
-        .card-left p { font-size: 1rem; margin-bottom: 15px; }
-        
-        .card-right { 
-            padding: 20px; 
-            flex: 0.7; 
-            align-items: flex-start; 
-        }
-
-        /* 2. 가로 슬라이드 모바일 최적화 (버튼 숨기고 스와이프 활성화) */
-        .slider-track {
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory; 
-            -webkit-overflow-scrolling: touch; 
-            padding-bottom: 20px; 
-            gap: 16px;
-        }
-
-        .nav-dock {
-            display: none;
-        }
-
-        .card-left ul {
-        justify-content: center;
-        }
-
-
-        .card-left ul::before {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* 모바일에서는 스크롤바 숨기기 */
-        .slider-track::-webkit-scrollbar { display: none; }
-        
-        .book-item { 
-            min-width: 220px; 
-            height: 320px; 
-            scroll-snap-align: center; /* 화면 중앙에 카드 위치 */
-        }
-        
-        /* 모바일에서는 화살표 버튼 숨김 */
-        .slide-ctrl { display: none; }
-
-        /* 3. About Me 섹션 세로 정렬 */
-        .about-item ul li { flex-direction: column; margin-bottom: 12px; }
-        .about-item ul li span { margin-bottom: 4px; color: #111; }
-        .mypic img { width: 120px; height: 160px; }
-        
-        /* 4. 하단 네비게이션 바 축소 */
-        .nav-dock { 
-            width: 90%; 
-            flex-wrap: wrap; /* 자리가 부족하면 줄바꿈 */
-            justify-content: center; 
-            bottom: 20px; 
-            border-radius: 16px;
-            padding: 8px;
-        }
-        .nav-dock button { 
-            padding: 8px 12px; 
-            font-size: 0.8rem; 
-        }
-
-        /* 5. 모달 창 모바일 사이즈 */
-        .modal-content { max-width: 95%; max-height: 80vh; }
-        .close-btn { top: 15px; right: 20px; font-size: 30px; }
-
-        /* 모달 버튼들 */
-        .modal-nav { font-size: 2rem; padding: 10px; }
-        .prev-btn { left: 2%; }
-        .next-btn { right: 2%; }
-        .close-btn { top: 20px; right: 20px; font-size: 3rem; }
+       @media (max-width: 768px) {
+        .hero-top-row {
+        width: 100%;
+        padding: 0 5vw !important; 
+        margin-bottom: 8vh !important; 
     }
+
+    /* 2. 메인 굵은 글자 (양옆 안 잘리게 크기 조절) */
+    .hero-main-title { 
+        font-size: 8.5vw !important; 
+        letter-spacing: -1px; 
+    }
+    .sliding-container {
+        display: flex;
+        justify-content: center; 
+        align-items: baseline !important; 
+    }
+
+    .sliding-words {
+        margin-top: 0 !important; 
+        height: 1.2em; 
+    }
+
+    .static-text {
+        margin-right: 2vw; 
+    }
+
+    /* 1. 전체 카드 크기 */
+    .card-box { 
+        width: 95%; 
+        height: 80dvh; 
+        border-radius: 24px; 
+    }
+    
+    /* 2. 텍스트 영역 */
+    .card-left { 
+        height: auto !important; 
+        padding: 40px 20px 10px 20px !important; 
+        flex: none !important;
+        justify-content: center;
+    }
+    
+    #sec-6 .card-left {
+        height: 100% !important;
+        padding-top: 20px !important;
+    }
+
+    /* 3. 카드 슬라이더 영역 */
+    .card-right { 
+        padding: 0px 20px 20px 20px; 
+        flex: 1; 
+        align-items: center; 
+    }
+    #sec-6 .card-right { padding: 60px 30px; }
+
+    /* 4. 글자 크기 및 제목 밑 여백 */
+    .card-left h2 { 
+        font-size: 1.9rem; 
+        margin-bottom: 15px; 
+        text-align: center; 
+        line-height: 1.2; 
+    }
+    .card-left p { 
+        font-size: 0.95rem; 
+        margin-bottom: 15px; 
+        text-align: center; 
+    }
+    .hero-intro-text { font-size: 1.1rem; padding: 0 10%; text-align: center; }
+    .top-tag { font-size: 0.8rem; }
+    
+    .card-left .webh2 br { display: none; }
+    .card-left .webh2 br::after { content: " "; }
+
+    /* 5. 사용 툴 숨기기 */
+    .card-left ul { display: none !important; }
+
+    /* 6. About 페이지 */
+    .mypic img { 
+        width: 120px; 
+        height: 160px; 
+        margin-bottom: 10px;
+    }
+    .card-left .myspeak { 
+        font-size: 1.15rem; 
+        line-height: 1.4; 
+        margin-bottom: 15px; 
+        text-align: center; 
+    }
+    .about-item ul li { flex-direction: column; margin-bottom: 12px; }
+    .about-item ul li span { margin-bottom: 4px; color: #111; }
+    .about-toggle-btn { margin-top: 15px !important; }
+
+    /* 7. 작품 카드(슬라이더) */
+    .slider-track {
+        overflow-x: auto; 
+        scroll-snap-type: x mandatory; 
+        -webkit-overflow-scrolling: touch; 
+        padding-bottom: 10px; 
+        gap: 16px;
+    }
+    .slider-track::-webkit-scrollbar { display: none; }
+    
+    .book-item { 
+        min-width: 200px; 
+        height: 280px; 
+        scroll-snap-align: center; 
+    }
+
+    /* 8. 숨길 요소들 */
+    .nav-dock { display: none; }
+    .slide-ctrl { display: none; }
+
+    /* 9. 모달 창 반응형 */
+    .modal-content { max-width: 95%; max-height: 80vh; }
+    .modal-nav { font-size: 2rem; padding: 10px; }
+    .prev-btn { left: 2%; }
+    .next-btn { right: 2%; }
+    .close-btn { top: 20px; right: 20px; font-size: 3rem; }
+}

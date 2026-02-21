@@ -232,7 +232,7 @@
                            
                              <div class="book-item"  onclick="openModal('./images/모노2.png')"><div class="book-cover" style="background-image: url(./images/monosum.jpg); background-size: cover;"></div><div class="book-title">MONO포스터</div><div class="book-sub">2026.2</div></div>
 
-                         <div class="book-item" onclick="openModal('./images/2026새해연하장.png')"><div class="book-cover" style="background-image: url('./images/2026sum.jpg'); background-size:contain;"></div><div class="book-title">2026 새해 연하장</div><div class="book-sub">2026.1</div></div>
+                         <div class="book-item" onclick="openModal('./images/2026새해연하장.png')"><div class="book-cover" style="background-image: url('./images/2026sum.jpg'); background-size:cover;"></div><div class="book-title">2026 새해 연하장</div><div class="book-sub">2026.1</div></div>
 
                         
                         </div>
@@ -273,7 +273,7 @@
                     <div class="card-right">
                         <div class="slider-track" id="track-3">
                            
-                            <div class="book-item" onclick="window.open('https://hong-sehun.github.io/minumsa/', '_blank')"><div class="book-cover" style="background-image: url(./images/minsum.jpg); background-size: contain;">
+                            <div class="book-item" onclick="window.open('https://hong-sehun.github.io/minumsa/', '_blank')"><div class="book-cover" style="background-image: url(./images/minsum.jpg); background-size: cover;">
                              <div class="book-info-overlay">
                                 <p class="overlay-text">도서출판사 민음사<br>리디자인&웹페이지 코딩</p>
                                 <span class="view-more">바로가기 +</span>
@@ -281,7 +281,7 @@
                         </div>
                         <div class="book-title">민음사 웹리디자인</div><div class="book-sub">2025.2</div></div>
 
-                         <div class="book-item" onclick="window.open('https://hong-sehun.github.io/sehunportfolio/', '_blank')"><div class="book-cover" style="background-image: url(./images/sesum.jpg); background-size: contain;">
+                         <div class="book-item" onclick="window.open('https://hong-sehun.github.io/sehunportfolio/', '_blank')"><div class="book-cover" style="background-image: url(./images/sesum.jpg); background-size: cover;">
                              <div class="book-info-overlay">
                                 <p class="overlay-text">개인 캐릭터 활용<br>포트폴리오 웹페이지 코딩</p>
                                 <span class="view-more">바로가기 +</span>
@@ -403,19 +403,26 @@
         }
     }, { passive: false });
 
-    // 모바일 스와이프 민감도 향상 (40 -> 30으로 줄여서 살짝만 그어도 넘어가게)
-    let touchStartY = 0;
+    // 모바일 스와이프 민감도 향상 
+   let touchStartY = 0;
+    let touchStartX = 0; 
+
     viewport.addEventListener('touchstart', (e) => { 
         touchStartY = e.changedTouches[0].screenY; 
+        touchStartX = e.changedTouches[0].screenX; 
     }, { passive: true });
 
     viewport.addEventListener('touchend', (e) => {
         if (isScrolling) return;
+        
         const touchEndY = e.changedTouches[0].screenY;
-        const swipeDistance = touchStartY - touchEndY;
+        const touchEndX = e.changedTouches[0].screenX;
+        
+        const swipeDistanceY = touchStartY - touchEndY; 
+        const swipeDistanceX = touchStartX - touchEndX; 
 
-        if (Math.abs(swipeDistance) > 30) {
-            const direction = swipeDistance > 0 ? 1 : -1;
+        if (Math.abs(swipeDistanceY) > Math.abs(swipeDistanceX) && Math.abs(swipeDistanceY) > 30) {
+            const direction = swipeDistanceY > 0 ? 1 : -1;
             let targetIndex = globalCurrentIndex + direction;
 
             if (targetIndex >= 0 && targetIndex <= 5) {
@@ -438,10 +445,8 @@
             behavior: 'smooth' 
         });
 
-        // 기다리지 않고 카드를 즉시 등장시킴!
         updateActiveStates(index);
-
-        // 스크롤 잠금 시간을 800ms -> 500ms로 대폭 단축
+    
         setTimeout(() => {
             viewport.style.scrollSnapType = 'y mandatory';
             isScrolling = false;

@@ -770,11 +770,14 @@
     }
     
     /* 4. About */
-    .about-grid { 
-        display: grid; 
+ .about-grid {
         grid-template-columns: 1fr !important; 
-        gap: 20px; 
-        width: 100%; 
+        gap: 20px !important; 
+    }
+    
+    .about-item-skill {
+        grid-column: span 1 !important; 
+        margin-top: 10px !important;
     }
 
     #sec-6 .card-left {
@@ -859,6 +862,39 @@
     .next-btn { right: 2%; }
     .close-btn { top: 20px; right: 20px; font-size: 3rem; }
     .about-item h3 { font-size: 1.2rem; margin-bottom: 10px; }
-    .about-item ul li { flex-direction: column; margin-bottom: 10px; font-size: 0.85rem;}
-    .about-item ul li span { margin-bottom: 2px; }
+
+
+
+.about-item ul li {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important; 
+        align-items: flex-start !important;
+        width: 100% !important; 
+        gap: 30px !important; 
+        margin-bottom: 16px;
+    }
+
+    /* 2. 왼쪽 영역 (날짜 등) */
+    .about-item ul li span {
+        flex: 0 0 auto !important; 
+        min-width: 115px !important; 
+        color: #999 !important;
+        font-size: 0.85rem;
+        margin-bottom: 0 !important;
+        text-align: left !important;
+    }
+
+    /* 3. 오른쪽 영역 (줄바꿈 및 끝선 맞추기) */
+    .about-item ul li div {
+        flex: 1 !important; 
+        
+        font-size: 0.85rem;
+        line-height: 1.5; 
+        word-break: keep-all !important; 
+        overflow-wrap: break-word !important; 
+        text-align: left !important; 
+    }
+
+   
 }

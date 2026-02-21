@@ -347,334 +347,238 @@
         <button class="modal-nav next-btn" onclick="changeImage(1)">&#10095;</button>
     </div>
 
-    <script>
-            function moveSlide(trackId, dir) {
-            const track = document.getElementById(trackId);
-            const container = track.parentElement;
-            const items = track.querySelectorAll('.book-item');
-            
-            if (items.length === 0) return;
+<script>
+    // 1. 가로 슬라이더 함수
+    function moveSlide(trackId, dir) {
+        const track = document.getElementById(trackId);
+        const container = track.parentElement;
+        const items = track.querySelectorAll('.book-item');
+        if (items.length === 0) return;
 
-    
-            const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
-            const itemWidth = items[0].offsetWidth;
-            const moveUnit = itemWidth + gap; 
-            const containerStyle = window.getComputedStyle(container);
-            const containerInnerWidth = container.clientWidth - parseFloat(containerStyle.paddingLeft) - parseFloat(containerStyle.paddingRight);
-            const visibleCount = Math.floor(containerInnerWidth / moveUnit);
-            const scrollCount = visibleCount > 0 ? visibleCount : 1; 
-            const currentTransform = track.style.transform;
-            let currentX = 0;
-            if (currentTransform) {
-                const match = currentTransform.match(/translateX\(([-0-9.]+)px\)/);
-                if (match) currentX = parseFloat(match[1]);
-            }
-
-            let nextX;
-            if (dir === 1) { 
-                nextX = currentX - (moveUnit * scrollCount);
-            } else { 
-                nextX = currentX + (moveUnit * scrollCount);
-            }
-
-            const maxScroll = -(track.scrollWidth - containerInnerWidth);
-            
-            if (nextX > 0) nextX = 0;
-            if (nextX < maxScroll) nextX = maxScroll; 
-
-            track.style.transform = `translateX(${nextX}px)`;
+        const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
+        const itemWidth = items[0].offsetWidth;
+        const moveUnit = itemWidth + gap; 
+        const containerStyle = window.getComputedStyle(container);
+        const containerInnerWidth = container.clientWidth - parseFloat(containerStyle.paddingLeft) - parseFloat(containerStyle.paddingRight);
+        const visibleCount = Math.floor(containerInnerWidth / moveUnit);
+        const scrollCount = visibleCount > 0 ? visibleCount : 1; 
+        
+        let currentX = 0;
+        if (track.style.transform) {
+            const match = track.style.transform.match(/translateX\(([-0-9.]+)px\)/);
+            if (match) currentX = parseFloat(match[1]);
         }
 
-      function moveToIndex(index) {
-                const viewport = document.getElementById('main-viewport');
-                const targetPos = index * window.innerHeight;
-                
-                // 이동하는 동안만 스냅 잠시 끄기
-                viewport.style.scrollSnapType = 'none';
-                
-                viewport.scrollTo({ 
-                    top: targetPos, 
-                    behavior: 'smooth' 
-                });
+        let nextX = dir === 1 ? currentX - (moveUnit * scrollCount) : currentX + (moveUnit * scrollCount);
+        const maxScroll = -(track.scrollWidth - containerInnerWidth);
+        
+        if (nextX > 0) nextX = 0;
+        if (nextX < maxScroll) nextX = maxScroll; 
 
-                // 이동이 끝날 즈음 다시 켜기
-                setTimeout(() => { 
-                    viewport.style.scrollSnapType = 'y mandatory'; 
-                }, 600); 
-            }
+        track.style.transform = `translateX(${nextX}px)`;
+    }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // 커서 이펙트
-            const section = document.getElementById('sec-hero');
-            const cursorDot = document.querySelector('.cursor-dot');
-            const cursorFollower = document.querySelector('.cursor-follower');
-            const hoverTargets = document.querySelectorAll('.hover-target');
+    // 2. 전체 스크롤 초고속 반응 로직
+    const viewport = document.getElementById('main-viewport');
+    const navBtns = document.querySelectorAll('.nav-dock button');
+    const allCardSections = [document.getElementById('sec-6'), document.getElementById('sec-5'), document.getElementById('sec-4'), document.getElementById('sec-3')];
+    const fadeSections = [document.getElementById('sec-6'), document.getElementById('sec-5'), document.getElementById('sec-4')];
 
-            if(section && cursorDot && cursorFollower) {
-                section.addEventListener('mousemove', (e) => {
-                    const x = e.clientX; const y = e.clientY;
-                    cursorDot.style.left = `${x}px`; cursorDot.style.top = `${y}px`;
-                    cursorFollower.style.left = `${x}px`; cursorFollower.style.top = `${y}px`;
-                });
-                hoverTargets.forEach(target => {
-                    target.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
-                    target.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
-                });
-                section.addEventListener('mouseleave', () => { cursorDot.style.opacity = '0'; cursorFollower.style.opacity = '0'; });
-                section.addEventListener('mouseenter', () => { cursorDot.style.opacity = '1'; cursorFollower.style.opacity = '1'; });
-            }
+    let isScrolling = false;
+    let globalCurrentIndex = 0; // 현재 카드를 변수로 확실하게 기억시킴
 
-            // 타이핑 이펙트
-            const textElement = document.getElementById("typing-text");
-            if(textElement) {
-                const phrase = "HELLO:)"; let index = 0;
-                function typeEffect() {
-                    if (index < phrase.length) {
-                        textElement.textContent += phrase.charAt(index); index++; setTimeout(typeEffect, 150);
-                    }
-                }
-                typeEffect();
-            }
-        });
+    // 휠 한 칸만 굴려도 즉시 반응
+    viewport.addEventListener('wheel', (e) => {
+        e.preventDefault(); 
+        if (isScrolling) return; 
+        
+        // 너무 미세한 터치패드 떨림 방지
+        if (Math.abs(e.deltaY) < 10) return; 
 
-        const viewport = document.getElementById('main-viewport');
-        const navBtns = document.querySelectorAll('.nav-dock button');
-        const allCardSections = [document.getElementById('sec-6'), document.getElementById('sec-5'), document.getElementById('sec-4'), document.getElementById('sec-3')];
-        const fadeSections = [document.getElementById('sec-6'), document.getElementById('sec-5'), document.getElementById('sec-4')];
+        const direction = e.deltaY > 0 ? 1 : -1;
+        let targetIndex = globalCurrentIndex + direction;
 
-        let isScrolling = false;
-
-        // 모바일 터치 이벤트, 터치로 반응형 넘어가도록
-        let touchStartY = 0;
-        let touchEndY = 0;
-
-        viewport.addEventListener('touchstart', (e) => {
-            touchStartY = e.changedTouches[0].screenY;
-        }, { passive: true });
-
-        viewport.addEventListener('touchend', (e) => {
-            touchEndY = e.changedTouches[0].screenY;
-            handleSwipe();
-        }, { passive: true });
-
-        function handleSwipe() {
-            if (isScrolling) return;
-            
-            const swipeDistance = touchStartY - touchEndY;
-            const threshold = 40; // 스와이프 인식 최소 거리 (너무 민감하면 이 숫자를 늘리세요)
-
-            if (Math.abs(swipeDistance) > threshold) {
-                // swipeDistance가 양수면 아래로 스와이프(다음 카드), 음수면 위로 스와이프(이전 카드)
-                const direction = swipeDistance > 0 ? 1 : -1;
-                const scrollPos = viewport.scrollTop;
-                const windowHeight = window.innerHeight;
-                
-                let currentIndex = Math.round(scrollPos / windowHeight);
-                let targetIndex = currentIndex + direction;
-
-                // 인덱스 범위 확인 후 이동 (0번 홈 ~ 5번 푸터)
-                if (targetIndex >= 0 && targetIndex <= 5) {
-                    moveToIndex(targetIndex);
-                }
-            }
+        if (targetIndex >= 0 && targetIndex <= 5) {
+            moveToIndex(targetIndex);
         }
+    }, { passive: false });
 
-        // 휠 이벤트 제어
-        viewport.addEventListener('wheel', (e) => {
-            if (isScrolling) return;
-            
-            const direction = e.deltaY > 0 ? 1 : -1;
-            const scrollPos = viewport.scrollTop;
-            const windowHeight = window.innerHeight;
-            
-            // 현재 위치를 기준으로 인덱스 계산
-            let currentIndex = Math.round(scrollPos / windowHeight);
-            let targetIndex = currentIndex + direction;
+    // 모바일 스와이프 민감도 향상 (40 -> 30으로 줄여서 살짝만 그어도 넘어가게)
+    let touchStartY = 0;
+    viewport.addEventListener('touchstart', (e) => { 
+        touchStartY = e.changedTouches[0].screenY; 
+    }, { passive: true });
 
-            // 인덱스 범위: 0(Home) ~ 5(Footer)
+    viewport.addEventListener('touchend', (e) => {
+        if (isScrolling) return;
+        const touchEndY = e.changedTouches[0].screenY;
+        const swipeDistance = touchStartY - touchEndY;
+
+        if (Math.abs(swipeDistance) > 30) {
+            const direction = swipeDistance > 0 ? 1 : -1;
+            let targetIndex = globalCurrentIndex + direction;
+
             if (targetIndex >= 0 && targetIndex <= 5) {
-                e.preventDefault();
                 moveToIndex(targetIndex);
             }
-        }, { passive: false });
+        }
+    }, { passive: true });
 
-        // 이동 함수: 속도 및 안정성 개선
-        function moveToIndex(index) {
-            if (isScrolling) return;
-            isScrolling = true;
+    function moveToIndex(index) {
+        if (isScrolling) return;
+        isScrolling = true;
+        globalCurrentIndex = index; // 인덱스 즉각 갱신
 
-            const targetPos = index * window.innerHeight;
-            
-            viewport.style.scrollSnapType = 'none'; 
-            
-            viewport.scrollTo({ 
-                top: targetPos, 
-                behavior: 'smooth' 
-            });
+        const targetPos = index * window.innerHeight;
+        
+        viewport.style.scrollSnapType = 'none'; 
+        
+        viewport.scrollTo({ 
+            top: targetPos, 
+            behavior: 'smooth' 
+        });
 
-            setTimeout(() => {
-                viewport.style.scrollSnapType = 'y mandatory';
-                isScrolling = false;
-                updateActiveStates(index);
-            }, 400); 
+        // 기다리지 않고 카드를 즉시 등장시킴!
+        updateActiveStates(index);
+
+        // 스크롤 잠금 시간을 800ms -> 500ms로 대폭 단축
+        setTimeout(() => {
+            viewport.style.scrollSnapType = 'y mandatory';
+            isScrolling = false;
+        }, 500); 
+    }
+
+    function updateActiveStates(currentIndex) {
+        navBtns.forEach((btn, idx) => {
+            btn.classList.toggle('active', idx === currentIndex);
+        });
+
+        allCardSections.forEach((sec, idx) => {
+            if (currentIndex >= idx + 1) sec.classList.add('active');
+            else sec.classList.remove('active');
+        });
+
+        fadeSections.forEach((sec, idx) => {
+            if (currentIndex > idx + 1) sec.classList.add('fade-out');
+            else sec.classList.remove('fade-out');
+        });
+    }
+
+    // 3. 모달 갤러리 로직
+    let currentImages = []; 
+    let currentIndex = 0;  
+
+    function openModal(source) {
+        const modal = document.getElementById('image-modal');
+        const counter = document.getElementById('image-counter');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+
+        if (Array.isArray(source)) currentImages = source;
+        else currentImages = [source];
+
+        currentIndex = 0;
+        updateModalImage();
+
+        if (currentImages.length > 1) {
+            prevBtn.style.display = 'block'; nextBtn.style.display = 'block'; counter.style.display = 'block';
+        } else {
+            prevBtn.style.display = 'none'; nextBtn.style.display = 'none'; counter.style.display = 'none';
         }
 
-        function updateActiveStates(currentIndex) {
-            const windowHeight = window.innerHeight;
+        modal.style.display = 'flex';
+        setTimeout(() => { modal.classList.add('show'); }, 10); 
+        document.getElementById('main-viewport').style.overflowY = 'hidden'; 
+    }
 
-            // 네비 버튼 활성화 
-            navBtns.forEach((btn, idx) => {
-                btn.classList.toggle('active', idx === currentIndex);
-            });
+    function updateModalImage() {
+        document.getElementById('full-image').src = currentImages[currentIndex];
+        document.getElementById('image-counter').innerText = `${currentIndex + 1} / ${currentImages.length}`;
+    }
 
-            // 카드 등장 및 사라짐
-            allCardSections.forEach((sec, idx) => {
-                // 인덱스 1이 sec-6, 2가 sec-5 ... 순서임
-                if (currentIndex >= idx + 1) {
-                    sec.classList.add('active');
-                } else {
-                    sec.classList.remove('active');
-                }
-            });
+    function changeImage(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = currentImages.length - 1;
+        else if (currentIndex >= currentImages.length) currentIndex = 0;
+        updateModalImage();
+    }
 
-            fadeSections.forEach((sec, idx) => {
-                if (currentIndex > idx + 1) {
-                    sec.classList.add('fade-out');
-                } else {
-                    sec.classList.remove('fade-out');
-                }
+    function closeModal() {
+        const modal = document.getElementById('image-modal');
+        modal.classList.remove('show');
+        setTimeout(() => { modal.style.display = 'none'; }, 300); 
+        document.getElementById('main-viewport').style.overflowY = 'scroll'; 
+    }
+
+    document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('image-modal');
+        if (modal.style.display === 'flex') {
+            e.preventDefault(); e.stopPropagation();
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'Escape') closeModal();
+        }
+    });
+
+    // 4. 원래 희주 님의 마우스 이펙트 & 기타 로직 완벽 복구
+    document.addEventListener('DOMContentLoaded', () => {
+        // 메인페이지 커서 (희주님 오리지널)
+        const section = document.getElementById('sec-hero');
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        const hoverTargets = document.querySelectorAll('.hover-target');
+
+        if(section && cursorDot && cursorFollower) {
+            section.addEventListener('mousemove', (e) => {
+                const x = e.clientX; const y = e.clientY;
+                cursorDot.style.left = `${x}px`; cursorDot.style.top = `${y}px`;
+                cursorFollower.style.left = `${x}px`; cursorFollower.style.top = `${y}px`;
             });
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
+                target.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
+            });
+            section.addEventListener('mouseleave', () => { cursorDot.style.opacity = '0'; cursorFollower.style.opacity = '0'; });
+            section.addEventListener('mouseenter', () => { cursorDot.style.opacity = '1'; cursorFollower.style.opacity = '1'; });
         }
 
-       /* [갤러리 모달 스크립트] */
-            let currentImages = []; // 현재 보고 있는 프로젝트의 이미지들
-            let currentIndex = 0;   // 현재 보고 있는 이미지 번호
-
-            // 모달 열기 함수 (이미지 주소 1개 또는 배열 모두 가능)
-            function openModal(source) {
-                const modal = document.getElementById('image-modal');
-                const modalImg = document.getElementById('full-image');
-                const counter = document.getElementById('image-counter');
-                const prevBtn = document.querySelector('.prev-btn');
-                const nextBtn = document.querySelector('.next-btn');
-
-                // 1. 입력받은게 배열인지 문자열인지 확인해서 리스트로 만듦
-                if (Array.isArray(source)) {
-                    currentImages = source;
-                } else {
-                    currentImages = [source]; // 하나만 들어오면 리스트로 감쌈
-                }
-
-                // 2. 초기화
-                currentIndex = 0;
-                updateModalImage();
-
-                // 3. 이미지가 1장이면 화살표 숨김, 여러장이면 보임
-                if (currentImages.length > 1) {
-                    prevBtn.style.display = 'block';
-                    nextBtn.style.display = 'block';
-                    counter.style.display = 'block';
-                } else {
-                    prevBtn.style.display = 'none';
-                    nextBtn.style.display = 'none';
-                    counter.style.display = 'none';
-                }
-
-                // 4. 모달 표시 (CSS 클래스로 제어)
-                modal.style.display = 'flex';
-                setTimeout(() => { modal.classList.add('show'); }, 10); // 부드러운 효과
-                document.getElementById('main-viewport').style.overflowY = 'hidden'; // 스크롤 잠금
-            }
-
-            // 이미지 업데이트 함수
-            function updateModalImage() {
-                const modalImg = document.getElementById('full-image');
-                const counter = document.getElementById('image-counter');
-
-                modalImg.src = currentImages[currentIndex];
-                counter.innerText = `${currentIndex + 1} / ${currentImages.length}`;
-            }
-
-            // 화살표 클릭 시 실행 (방향: -1 또는 1)
-            function changeImage(direction) {
-                currentIndex += direction;
-
-                // 첫 장에서 뒤로 가면 -> 마지막 장으로
-                if (currentIndex < 0) {
-                    currentIndex = currentImages.length - 1;
-                }
-                // 마지막 장에서 앞으로 가면 -> 첫 장으로
-                else if (currentIndex >= currentImages.length) {
-                    currentIndex = 0;
-                }
-
-                updateModalImage();
-            }
-
-            // 모달 닫기
-            function closeModal() {
-                const modal = document.getElementById('image-modal');
-                modal.classList.remove('show');
-                setTimeout(() => { modal.style.display = 'none'; }, 300); // 애니메이션 후 숨김
-                document.getElementById('main-viewport').style.overflowY = 'scroll'; // 스크롤 복구
-            }
-
-           /* [키보드 이벤트 통합 관리] */
-            document.addEventListener('keydown', (e) => {
-                const modal = document.getElementById('image-modal');
-
-                if (modal.style.display === 'flex') {
-                    
-                    e.preventDefault(); 
-                    e.stopPropagation();
-
-                    // 모달 내부 이미지 넘기기 실행
-                    if (e.key === 'ArrowLeft') changeImage(-1);
-                    if (e.key === 'ArrowRight') changeImage(1);
-                    if (e.key === 'Escape') closeModal();
-                    
-                    return; 
-                }
-            });
-
-
-        /* 아이템 마우스 호버 시 나오는 클릭버튼 */
-            const clickCursor = document.querySelector('.click-cursor');
-            const bookItems = document.querySelectorAll('.book-item');
-
-            // 1. 커서 움직임 (항상 마우스 따라다님)
-            document.addEventListener('mousemove', (e) => {
-                // requestAnimationFrame을 사용하여 부드럽게 이동
-                requestAnimationFrame(() => {
+        // 아이템 내부 Click 커서 (희주님 오리지널)
+        const clickCursor = document.querySelector('.click-cursor');
+        const bookItems = document.querySelectorAll('.book-item');
+        document.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                if(clickCursor) {
                     clickCursor.style.left = `${e.clientX}px`;
                     clickCursor.style.top = `${e.clientY}px`;
-                });
+                }
             });
+        });
+        bookItems.forEach(item => {
+            item.addEventListener('mouseenter', () => { if(clickCursor) clickCursor.classList.add('active'); });
+            item.addEventListener('mouseleave', () => { if(clickCursor) clickCursor.classList.remove('active'); });
+        });
 
-            // 2. book-item 호버 이벤트 연결
-            bookItems.forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    clickCursor.classList.add('active'); // 커서 보이기
-                    
-                    // (선택사항) 기존 메인 커서가 있다면 여기서 숨김 처리 가능
-                    // document.querySelector('.cursor-dot').style.opacity = 0;
-                });
+        // About 토글 버튼
+        window.toggleAbout = function() {
+            const aboutContent = document.querySelector('#sec-6 .card-right');
+            if(aboutContent) aboutContent.classList.toggle('show');
+        };
 
-                item.addEventListener('mouseleave', () => {
-                    clickCursor.classList.remove('active'); // 커서 숨기기
-         
-                });
-            });
-
-            // About 반응형 시 x버튼 보이기
-            function toggleAbout() {
-                const aboutContent = document.querySelector('#sec-6 .card-right');
-                aboutContent.classList.toggle('show');
+        // 타이핑 효과
+        const textElement = document.getElementById("typing-text");
+        if(textElement) {
+            const phrase = "HELLO:)"; let index = 0;
+            function typeEffect() {
+                if (index < phrase.length) {
+                    textElement.textContent += phrase.charAt(index); 
+                    index++; 
+                    setTimeout(typeEffect, 150);
+                }
             }
-
-        // 페이지 로드 시 시작
-            window.addEventListener('DOMContentLoaded', typeEffect);
-    </script>
+            typeEffect();
+        }
+    });
+</script>
 
 </body>
 </html>

@@ -171,13 +171,15 @@
             background: #f4f4f7;
         }
 
-        
-
         /* 커서 이펙트 */
-        .cursor-dot, .cursor-follower { position: absolute; top:0; left:0; border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+ 
+       .cursor-dot, .cursor-follower { position: absolute; top:0; left:0; border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
         .cursor-dot { width:8px; height:8px; background-color:#111; }
         .cursor-follower { width:50px; height:50px; background-color:#fff; mix-blend-mode:difference; transition:width 0.3s,height 0.3s,transform 0.1s; will-change:transform; }
         .cursor-follower.active { width:120px; height:120px; background-color:#00ff9d; }
+
+
+
 
         /* 배경 그래픽 스타일 */
         .hero-graphics.super-flashy {
@@ -274,34 +276,30 @@
         }
 
         /* 아이템 내부 클릭 커서 */
-            .click-cursor {
-                position: fixed;
-                top: 0; left: 0;
-                width: 80px; height: 80px;
-                background-color: rgba(0, 0, 0, 0.8); 
-                color: #fff;
-                font-weight: 800; 
-                font-size: 14px;
-                border-radius: 50%; 
-                display: flex; justify-content: center; align-items: center; 
-                pointer-events: none; 
-                z-index: 10000; 
-                transform: translate(-50%, -50%) scale(0); 
-                transition: transform 0.2s ease, opacity 0.2s ease;
-                opacity: 0;
-                letter-spacing: 1px;
-            }
-
-            /* 활성화 클래스가 붙으면 커짐 */
-            .click-cursor.active {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-
-            /* book-item 위에 있을 때는 기본 커서 숨김 */
-            .book-item {
-                cursor: none; 
-            }
+      .click-cursor {
+        position: fixed;
+        top: 0; left: 0;
+        width: 80px; height: 80px;
+        background-color: rgba(0, 0, 0, 0.8); 
+        color: #fff;
+        font-weight: 800; 
+        font-size: 14px;
+        border-radius: 50%; 
+        display: flex; justify-content: center; align-items: center; 
+        pointer-events: none; 
+        z-index: 10000; 
+        transform: translate(-50%, -50%) scale(0); 
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        opacity: 0;
+        letter-spacing: 1px;
+    }
+    .click-cursor.active {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    .book-item {
+        cursor: none; 
+    }
 
 
         /* 카드 배경 */
@@ -314,7 +312,7 @@
             overflow: hidden;
             opacity: 0;
             transform: translateY(150px) scale(0.95); 
-            transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         
@@ -364,7 +362,7 @@
         .sticky-section.fade-out .card-box {
             opacity: 0;
             transform: scale(0.9); 
-            transition: all 1s ease-out; 
+            transition: all 1.5s ease-out; 
         }
 
         /* 5. 카드 내부 디자인 */

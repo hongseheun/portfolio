@@ -186,7 +186,7 @@
         }
 
         /* 블러 그라데이션 */
-        .blur-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; animation: move-blob-rich 18s infinite alternate ease-in-out; }
+        .blur-blob { position: absolute; border-radius: 50%; opacity: 0.4; animation: move-blob-rich 18s infinite alternate ease-in-out; }
         .blob-rich-1 { top:-20%; right:-10%; width:700px; height:700px; background:radial-gradient(circle, rgba(0,255,157,0.3) 0%, transparent 70%); }
         .blob-rich-2 { bottom:-20%; left:-10%; width:800px; height:800px; background:radial-gradient(circle, rgba(180,180,210,0.35) 0%, transparent 70%); animation-delay:-6s; }
         .blob-rich-3 { top:40%; left:30%; width:500px; height:500px; background:radial-gradient(circle, rgba(50,50,50,0.15) 0%, transparent 70%); animation-delay:-12s; }
@@ -496,8 +496,8 @@
         /* [6. 네비게이션] */
         .nav-dock {
             position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.9); padding: 10px 10px; border-radius: 100px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.95); padding: 10px 10px; border-radius: 100px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
             display: flex; gap: 4px; z-index: 9999; border: 1px solid rgba(255,255,255,0.6);
         }
         .nav-dock button {
